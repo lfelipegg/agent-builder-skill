@@ -1,10 +1,10 @@
 # Agent Builder Skill
 
 `agent-builder` is a reusable agent skill for creating compact, durable
-`AGENTS.md` guidance for a repository. It helps an agent interview before
-drafting, keep the root `AGENTS.md` short, split deeper rules into
-`docs/agents/*`, and recommend focused `/agents` subagents when the project
-would benefit from them.
+`AGENTS.md` guidance for a repository. It helps an agent inspect before
+drafting, ask only for risky unknowns, keep the root `AGENTS.md` short, split
+deeper rules into `docs/agents/*` when useful, and recommend focused `/agents`
+subagents only when the project would benefit from them.
 
 ## What This Skill Does
 
@@ -14,13 +14,25 @@ instructions for a codebase. It is especially useful when a repository needs:
 - a short root `AGENTS.md` that future agents will actually read
 - durable project commands, guardrails, testing expectations, and response style
 - supporting `docs/agents/*` files for stack, security, database, frontend, or
-  deployment details
+  deployment details when the root guide would become too long
 - `/agents` subagent plans for distinct workstreams such as frontend, backend,
-  database, CI, docs, architecture, or security review
+  database, CI, docs, architecture, or security review when separate ownership
+  or context management is useful
 
-The root rule is simple: interview first, then write. The skill should not draft
-final agent instructions until it has asked the minimum required questions or
-has clearly marked assumptions that the user approved.
+The root rule is simple: inspect first, then choose the smallest safe path.
+High-stakes instructions use the full interview; quick drafts can proceed with
+clearly marked assumptions to confirm.
+
+## Modes
+
+- **Standard Mode:** interview-first for durable instructions, shared teams,
+  production systems, high-stakes repos, or projects with multiple workflows.
+- **Small Repo Mode:** one compact `AGENTS.md` for tiny repos, solo projects,
+  static sites, prototypes, early-stage repos, and small libraries. No
+  `docs/agents` split or `/agents` plan unless needed.
+- **Fast Draft With Assumptions:** inspect repo files first, then draft with an
+  `Assumptions to confirm` section and risky unknowns marked
+  `confirm before use`.
 
 ## When To Use It
 
@@ -49,16 +61,15 @@ instructions, repo guidance, and subagent planning.
 
 1. Inspect the repository, examples, package files, docs, and existing agent
    instructions.
-2. Ask the required interview questions about project identity, stack, commands,
-   guardrails, dependencies, worktrees, documentation policy, subagents, and
-   final response style.
-3. Summarize answers and assumptions before drafting.
-4. Create or update `AGENTS.md` with a hard 200-line maximum.
-5. Split detailed guidance into `docs/agents/*` when the root file would become
+2. Choose Standard Mode, Small Repo Mode, or Fast Draft With Assumptions.
+3. Ask only for missing facts that are not safely discoverable from repo files.
+4. Summarize answers and assumptions before drafting.
+5. Create or update `AGENTS.md` with a hard 200-line maximum.
+6. Split detailed guidance into `docs/agents/*` when the root file would become
    too long or too specialized.
-6. Recommend `/agents/orchestrator.md` whenever recommending more than one
-   subagent.
-7. Verify line count, links, commands, placeholders, and subagent ownership.
+7. Recommend `/agents/orchestrator.md` whenever recommending more than one
+   subagent, unless the user declines.
+8. Verify line count, links, commands, placeholders, and subagent ownership.
 
 ## Expected Output Files
 
@@ -73,14 +84,15 @@ recommend:
 - `agents/{subagent}/scripts/*`
 
 The skill keeps `AGENTS.md` as the quick-start operating guide. Deeper or
-less-frequently-needed details belong in supporting files.
+less-frequently-needed details belong in supporting files. Small Repo Mode may
+produce only `AGENTS.md`.
 
 ## Quality Gates
 
 Before finishing, the agent should confirm:
 
 - `AGENTS.md` is 200 lines or fewer
-- every linked `docs/agents/*` or `/agents/*` path exists
+- every linked `docs/agents/*` or `agents/*` path exists
 - commands came from repository files or user answers
 - placeholders are removed or clearly marked as assumptions requiring
   confirmation
@@ -134,8 +146,10 @@ description, or explicitly with:
 ## Files In This Skill
 
 - `SKILL.md` - the main skill instructions
-- `examples/basic-template.md` - compact `AGENTS.md` starter shape
-- `examples/agents-example.md` - alternate compact example
+- `examples/basic-template.md` - minimal single-file `AGENTS.md` for Small Repo
+  Mode
+- `examples/agents-example.md` - compact `AGENTS.md` plus an orchestrator and
+  one focused subagent
 - `examples/Very-long-AGENTS.md` - fuller example that still demonstrates a
   bounded root guide
 

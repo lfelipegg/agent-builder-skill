@@ -67,7 +67,9 @@ For non-trivial work:
 2. Create or use a dedicated git worktree under `.worktrees/` for the task
    before mutating repo-tracked files.
 3. Keep scope tight and avoid unrelated rewrites.
-4. Create or update a task plan document under `docs/YYYY-MM-DD-001-task-name/`
+4. Create or update task docs under
+   `docs/tasks/{ascending-number}-{iso-timestamp}-{task-title}/summary.md` and
+   `docs/tasks/{ascending-number}-{iso-timestamp}-{task-title}/next-steps.md`
    before implementation when the change affects multiple files, UI, routes,
    data structures, docs policy, i18n, or architecture.
 5. Implement the smallest coherent change.
