@@ -1,25 +1,19 @@
 # Prensa FIFA Agent Guide
 
-Use this file as the quick-start operating guide for agents working in this
-repository. Keep it short, current, and authoritative. Put expanded conventions
-in `docs/AGENT_GUIDE.md`, product requirements in `docs/PRD.md`, and product
-design rules in `docs/DESIGN.md`.
+Use this file as the quick-start operating guide for agents working in this repository. Keep it short, current, authoritative, and under 200 lines. This file contains durable future-agent rules only, not product requirements, feature plans, chat summaries, or temporary task notes.
+
+Put expanded agent conventions in `docs/AGENT_GUIDE.md`, product requirements in `docs/PRD.md` or `docs/specs/`, product design rules in `docs/DESIGN.md`, architecture decisions in `docs/decisions/`, handoffs in `docs/handoffs/`, review notes in `docs/reviews/`, and task records in `docs/tasks/`.
 
 ## Project Purpose
 
-Prensa FIFA is a Spanish-first SvelteKit website for press and media outlets to
-learn about FIFA Fan Fest Monterrey artist press conferences and request
-accreditation for one or more conference days.
+Prensa FIFA is a Spanish-first SvelteKit website for press and media outlets to learn about FIFA Fan Fest Monterrey artist press conferences and request accreditation for one or more conference days.
 
-The public experience has two core surfaces:
+Core public surfaces:
 
-- Event intro page: event information, artist schedule, FAQ, and registration
-  calls to action.
-- Registration form: media outlet details, responsible contact, selected
-  conference days, per-day accreditation rosters, and supporting evidence links.
+- Event intro page: event information, artist schedule, FAQ, and registration calls to action.
+- Registration form: media outlet details, responsible contact, selected conference days, per-day accreditation rosters, and supporting evidence links.
 
-Spanish is the default locale. English routes may live under `/en/` only when
-the project keeps English content current.
+Spanish is the default locale. English routes may live under `/en/` only when the project keeps English content current.
 
 ## Required Stack
 
@@ -39,76 +33,115 @@ Do not add dependencies without explicit user approval.
 
 ## Source Of Truth
 
-Read these before making meaningful changes:
+Read these before meaningful changes:
 
-- `docs/PRD.md` for product scope, registration rules, data model direction,
-  and acceptance criteria.
-- `docs/AGENT_GUIDE.md` for detailed coding, routing, i18n, testing, safety,
-  documentation, and git conventions.
-- `docs/DESIGN.md` before meaningful UI, styling, motion, or visual changes.
-- `docs/CHANGELOG.md` for user-visible and important technical history.
-- `package.json` for available scripts. Do not invent scripts.
-- `messages/` and `project.inlang/` for localization configuration.
+- `docs/PRD.md`: product scope, registration rules, data model direction, and acceptance criteria.
+- `docs/AGENT_GUIDE.md`: detailed coding, routing, i18n, testing, safety, documentation, and git conventions.
+- `docs/DESIGN.md`: UI, styling, motion, visual direction, and design constraints.
+- `docs/CHANGELOG.md`: user-visible and important technical history.
+- `package.json`: available scripts. Do not invent scripts.
+- `messages/` and `project.inlang/`: localization configuration.
 
-If guidance conflicts, follow this priority:
+Conflict priority:
 
 1. Explicit user request.
 2. Current repository behavior and code.
 3. `docs/PRD.md`.
-4. `AGENTS.md`.
+4. This `AGENTS.md`.
 5. Detailed docs under `docs/`.
 6. General framework habits.
+
+## Content Routing
+
+Do not use `AGENTS.md` as a project notebook. Route content correctly:
+
+- Durable future-agent rule: `AGENTS.md`
+- Detailed agent guidance: `docs/AGENT_GUIDE.md`
+- Product requirements or feature specs: `docs/PRD.md` or `docs/specs/`
+- Implementation plans: `docs/plans/`
+- Architecture decisions and tradeoffs: `docs/decisions/`
+- Handoffs and continuation notes: `docs/handoffs/`
+- Review records: `docs/reviews/`
+- Current task records: `docs/tasks/`
+
+`AGENTS.md` may point to these locations. It should not duplicate their full content.
 
 ## Agent Workflow
 
 For non-trivial work:
 
 1. Inspect existing files before deciding what to change.
-2. Create or use a dedicated git worktree under `.worktrees/` for the task
-   before mutating repo-tracked files.
-3. Keep scope tight and avoid unrelated rewrites.
-4. Create or update task docs under
-   `docs/tasks/{ascending-number}-{iso-timestamp}-{task-title}/summary.md` and
-   `docs/tasks/{ascending-number}-{iso-timestamp}-{task-title}/next-steps.md`
-   before implementation when the change affects multiple files, UI, routes,
-   data structures, docs policy, i18n, or architecture.
-5. Implement the smallest coherent change.
-6. Add or update focused tests when behavior changes.
-7. Run the relevant existing checks from `package.json`.
-8. Update task documentation and `docs/CHANGELOG.md`.
-9. Summarize changed files, verification, docs, and follow-ups.
+2. Read the relevant source-of-truth documents before editing.
+3. Create or use a dedicated git worktree under `.worktrees/` before mutating repo-tracked files.
+4. Keep scope tight and avoid unrelated rewrites.
+5. Create or update task docs when changes affect multiple files, UI, routes, data structures, docs policy, i18n, or architecture.
+6. Implement the smallest coherent change.
+7. Add or update focused tests when behavior changes.
+8. Run the relevant existing checks from `package.json`.
+9. Update task docs and `docs/CHANGELOG.md` when behavior, setup, commands, architecture, or user-visible behavior changed.
+10. Summarize changed files, verification, docs, and follow-ups.
 
-## Planning Interrogation
+## Task Documentation
 
-Use `.codex/skills/grill-me` for major plans, architecture choices,
-substantial UI or design changes, and explicit user requests to "grill me" or
-stress-test a plan or design.
+For non-trivial tasks, use:
 
-When using it, explore repo-discoverable facts instead of asking the user, ask
-one question at a time, include the recommended answer with each question, and
-resolve decision dependencies before implementation.
+```text
+docs/tasks/{ascending-number}-{iso-timestamp}-{task-title}/summary.md
+docs/tasks/{ascending-number}-{iso-timestamp}-{task-title}/next-steps.md
+```
 
-## Non-Negotiable Guardrails
+`summary.md` captures the request, decisions, files changed, verification, and unresolved risks. `next-steps.md` captures follow-ups, deferred work, cleanup opportunities, and prerequisites.
+
+Do not put task progress or handoff detail in `AGENTS.md`.
+
+## Skill Usage
+
+Use `.codex/skills/grill-me` for major plans, architecture choices, substantial UI or design changes, and explicit user requests to "grill me" or stress-test a plan or design.
+
+When using it, explore repo-discoverable facts instead of asking the user, ask one question at a time, include the recommended answer with each question, and resolve decision dependencies before implementation.
+
+Do not add additional skill names here unless the repo or user confirms they are available.
+
+## Implementation Rules
 
 - Use Svelte 5 Runes Mode for Svelte components.
-- Use Tailwind utilities and the project theme. Do not create custom CSS
-  classes or global styles unless explicitly approved.
+- Use Tailwind utilities and the project theme. Do not create custom CSS classes or global styles unless explicitly approved.
 - Keep reusable components in `src/lib/components`.
-- Keep reusable data, labels, metadata, route labels, event schedules, form
-  options, and localized content in `src/lib/data`.
+- Keep reusable data, labels, metadata, route labels, event schedules, form options, and localized content in `src/lib/data`.
 - Keep reusable logic in `src/lib/utils`.
-- Keep server-only Supabase writes, validation, and secrets in server routes or
-  server-only modules. Never expose service-role keys to client code.
-- Add both `es` and `en` values for new localized content when English is
-  maintained for the affected route.
+- Keep server-only Supabase writes, validation, and secrets in server routes or server-only modules. Never expose service-role keys to client code.
+- Add both `es` and `en` values for new localized content when English is maintained for the affected route.
 - Use Spanish slugs for Spanish routes.
-- Work from a dedicated git worktree under `.worktrees/` for implementation
-  tasks, including docs, UI, code, tests, data structures, and architecture
-  changes.
+- Prefer existing project patterns before introducing new ones.
+- Prefer platform APIs, SvelteKit features, existing utilities, and installed dependencies before adding new packages.
+- Do not create generic wrappers, services, managers, repositories, or helpers unless the current task proves reuse or boundary value.
+
+## UI And Design Rules
+
+Before meaningful UI, styling, motion, layout, or copy changes, read `docs/DESIGN.md` and the relevant PRD/spec.
+
+- Use existing theme tokens, components, and layout patterns before creating new ones.
+- Keep Spanish copy primary and consistent with established terminology.
+- Maintain keyboard access, visible focus states, readable contrast, and useful form errors.
+- Use GSAP only when motion improves hierarchy, orientation, or transitions.
+- Test responsive behavior for mobile and desktop when UI changes.
+
+## Security And Data Safety
+
+- Do not print, request, or commit secrets.
+- Do not log service-role keys, access tokens, session cookies, accreditation evidence links, personal contact data, or raw registration payloads.
+- Validate registration input server-side.
+- Enforce authorization and data access rules server-side.
+- Treat client-side checks as UX only, not security.
+- Ask before schema changes, production data changes, deploy topology changes, or paid-service changes.
+
+## Git And Guardrails
+
+- Work from a dedicated git worktree under `.worktrees/` for implementation tasks, including docs, UI, code, tests, data structures, and architecture changes.
 - Do not change unrelated files.
-- Do not delete, overwrite, push, deploy, force-push, or install dependencies
-  without permission.
-- Do not print or request secrets.
+- Do not revert user changes unless explicitly asked.
+- Do not delete, overwrite, push, deploy, force-push, or run destructive git commands without explicit approval.
+- Do not weaken tests, checks, auth, authorization, validation, accessibility, privacy, or CI to make work pass.
 
 ## Verification
 
@@ -119,9 +152,33 @@ Use the scripts that exist in `package.json`:
 - `npm run test`
 - `npm run build`
 
-Choose checks based on the change. If a check cannot run or fails because of
-pre-existing unrelated work or environment setup, report that clearly with the
-relevant output.
+Choose checks based on the change. If a check cannot run or fails because of pre-existing unrelated work or environment setup, report that clearly with the relevant output.
+
+## Review Rules
+
+Before requesting review, provide summary of changes, files changed, tests or checks run, docs updated, known limitations, and deferred follow-up work.
+
+During review, check PRD/spec alignment, implementation simplicity, tests, security, data safety, accessibility, localization, UI quality, and docs.
+
+## Acceptance Rules
+
+A task can be accepted only when acceptance criteria are met, relevant checks pass or failures are explained, review findings are resolved or explicitly deferred, docs are updated when behavior/setup/commands/architecture/product decisions changed, and no unrelated changes are included.
+
+## Merge Rules
+
+Do not merge until the task is accepted, CI or the local equivalent passes, migrations/rollout risks/data risks are documented when relevant, rollback notes exist for risky changes, and any `AGENTS.md` change was reviewed as a durable instruction change.
+
+## Nested AGENTS.md
+
+Use nested `AGENTS.md` files only if a subdirectory needs local rules that meaningfully differ from this root guide. Nested files should cover local commands, editable areas, forbidden imports, package boundaries, testing rules, or local security constraints. Do not repeat the root unless repetition prevents a serious mistake.
+
+## AGENTS.md Maintenance
+
+Update this file only when a rule should apply to future agent work.
+
+Do not add one-off task details, full specs, implementation plans, chat summaries, temporary task notes, product requirements, large glossaries, or unresolved brainstorms.
+
+When this file grows too long, move detailed content to the correct document and leave a short pointer here. Review changes to this file like code: the new rule must be durable, specific, correctly placed, non-conflicting, and short.
 
 ## Final Response
 
@@ -129,16 +186,12 @@ After coding, respond in this shape:
 
 ```txt
 Done.
-
 Changed:
 - ...
-
 Tested:
 - ...
-
 Docs:
 - ...
-
 Notes:
 - ...
 ```
