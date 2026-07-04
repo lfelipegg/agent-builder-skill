@@ -95,8 +95,9 @@ Do not merge, push, deploy, or perform release actions unless explicitly asked.
 ## Small Repo Policy
 
 - Keep guidance in this single `AGENTS.md` unless it would exceed 200 lines.
-- Do not add `docs/agents`, nested `AGENTS.md`, or `/agents` unless the user asks
-  or distinct workstreams make them clearly useful.
+- Add `docs/agents` only when needed to stay under 200 lines or when the user asks.
+- Add nested `AGENTS.md` only when local rules meaningfully differ from the root.
+- Add `/agents` only when explicitly requested or distinct workstreams justify it.
 - If this file grows too long, move detailed guidance to the correct document and
   leave a short pointer here.
 

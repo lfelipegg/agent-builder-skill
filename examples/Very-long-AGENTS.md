@@ -2,7 +2,7 @@
 
 Use this file as the quick-start operating guide for agents working in this repository. Keep it short, current, authoritative, and under 200 lines. This file contains durable future-agent rules only, not product requirements, feature plans, chat summaries, or temporary task notes.
 
-Put expanded agent conventions in `docs/AGENT_GUIDE.md`, product requirements in `docs/PRD.md` or `docs/specs/`, product design rules in `docs/DESIGN.md`, architecture decisions in `docs/decisions/`, handoffs in `docs/handoffs/`, review notes in `docs/reviews/`, and task records in `docs/tasks/`.
+Put expanded agent conventions in `docs/agents/*`, product requirements and feature specs in `docs/specs/*`, product intent and audience in `PRODUCT.md`, visual direction in `DESIGN.md`, architecture decisions in `docs/decisions/`, handoffs in `docs/handoffs/`, review notes in `docs/reviews/`, and task records in `docs/tasks/`.
 
 ## Project Purpose
 
@@ -35,9 +35,10 @@ Do not add dependencies without explicit user approval.
 
 Read these before meaningful changes:
 
-- `docs/PRD.md`: product scope, registration rules, data model direction, and acceptance criteria.
-- `docs/AGENT_GUIDE.md`: detailed coding, routing, i18n, testing, safety, documentation, and git conventions.
-- `docs/DESIGN.md`: UI, styling, motion, visual direction, and design constraints.
+- `docs/specs/*`: product scope, registration rules, data model direction, and acceptance criteria.
+- `PRODUCT.md`: product intent, audience, positioning, and product-wide direction.
+- `docs/agents/*`: detailed coding, routing, i18n, testing, safety, documentation, and git conventions.
+- `DESIGN.md`: UI, styling, motion, visual direction, and design constraints.
 - `docs/CHANGELOG.md`: user-visible and important technical history.
 - `package.json`: available scripts. Do not invent scripts.
 - `messages/` and `project.inlang/`: localization configuration.
@@ -46,9 +47,9 @@ Conflict priority:
 
 1. Explicit user request.
 2. Current repository behavior and code.
-3. `docs/PRD.md`.
+3. `docs/specs/*` and `PRODUCT.md`.
 4. This `AGENTS.md`.
-5. Detailed docs under `docs/`.
+5. `DESIGN.md` and detailed docs under `docs/`.
 6. General framework habits.
 
 ## Content Routing
@@ -56,8 +57,10 @@ Conflict priority:
 Do not use `AGENTS.md` as a project notebook. Route content correctly:
 
 - Durable future-agent rule: `AGENTS.md`
-- Detailed agent guidance: `docs/AGENT_GUIDE.md`
-- Product requirements or feature specs: `docs/PRD.md` or `docs/specs/`
+- Detailed agent guidance: `docs/agents/*`
+- Product requirements or feature specs: `docs/specs/*`
+- Product intent, audience, and positioning: `PRODUCT.md`
+- Visual direction and design principles: `DESIGN.md`
 - Implementation plans: `docs/plans/`
 - Architecture decisions and tradeoffs: `docs/decisions/`
 - Handoffs and continuation notes: `docs/handoffs/`
@@ -96,11 +99,9 @@ Do not put task progress or handoff detail in `AGENTS.md`.
 
 ## Skill Usage
 
-Use `.codex/skills/grill-me` for major plans, architecture choices, substantial UI or design changes, and explicit user requests to "grill me" or stress-test a plan or design.
+Project-specific skill usage: confirm before use.
 
-When using it, explore repo-discoverable facts instead of asking the user, ask one question at a time, include the recommended answer with each question, and resolve decision dependencies before implementation.
-
-Do not add additional skill names here unless the repo or user confirms they are available.
+Do not add skill names unless repo files or user answers confirm they are available.
 
 ## Implementation Rules
 
@@ -118,7 +119,7 @@ Do not add additional skill names here unless the repo or user confirms they are
 
 ## UI And Design Rules
 
-Before meaningful UI, styling, motion, layout, or copy changes, read `docs/DESIGN.md` and the relevant PRD/spec.
+Before meaningful UI, styling, motion, layout, or copy changes, read `DESIGN.md` and the relevant product/spec docs.
 
 - Use existing theme tokens, components, and layout patterns before creating new ones.
 - Keep Spanish copy primary and consistent with established terminology.
@@ -145,14 +146,14 @@ Before meaningful UI, styling, motion, layout, or copy changes, read `docs/DESIG
 
 ## Verification
 
-Use the scripts that exist in `package.json`:
+Use scripts confirmed in this example repo's `package.json`, such as:
 
 - `npm run check`
 - `npm run lint`
 - `npm run test`
 - `npm run build`
 
-Choose checks based on the change. If a check cannot run or fails because of pre-existing unrelated work or environment setup, report that clearly with the relevant output.
+In a real repo, use only scripts found in repo files or user answers. Choose checks based on the change. If a check cannot run or fails because of pre-existing unrelated work or environment setup, report that clearly with the relevant output.
 
 ## Review Rules
 
