@@ -1,8 +1,13 @@
+# Fuller project guide example
+
+The fenced guide illustrates adopted policies for a particular project. Verify
+its stack, paths, and policies before adapting it; these are not universal
+requirements. Authoring notes outside the fence are not generated instructions.
+
+```markdown
 # Prensa FIFA Agent Guide
 
-Use this file as the quick-start operating guide for agents working in this repository. Keep it short, current, authoritative, and under 200 lines. This file contains durable future-agent rules only, not product requirements, feature plans, chat summaries, or temporary task notes.
-
-Put expanded agent conventions in `docs/agents/*`, product requirements and feature specs in `docs/specs/*`, product intent and audience in `PRODUCT.md`, visual direction in `DESIGN.md`, architecture decisions in `docs/decisions/`, handoffs in `docs/handoffs/`, review notes in `docs/reviews/`, and task records in `docs/tasks/`.
+Use this file as the quick-start operating guide for agents working in this repository. Keep it short, current, authoritative, and at most 200 lines unless the user specifies another cap. This file contains durable future-agent rules only, not product requirements, feature plans, chat summaries, or temporary task notes.
 
 ## Project Purpose
 
@@ -29,28 +34,23 @@ Use the existing project stack and the approved product stack:
 - Supabase with Postgres for registration data
 - Vercel as the deployment target
 
-Do not add dependencies without explicit user approval.
+This project requires approval for new dependencies. Honor approval already given for the concrete addition; do not ask again.
 
 ## Source Of Truth
 
-Read these before meaningful changes:
+Read the relevant sources for the requested change:
 
 - `docs/specs/*`: product scope, registration rules, data model direction, and acceptance criteria.
 - `PRODUCT.md`: product intent, audience, positioning, and product-wide direction.
-- `docs/agents/*`: detailed coding, routing, i18n, testing, safety, documentation, and git conventions.
+- `docs/agents/*`: read the relevant detailed convention before changing routing, i18n, testing, safety, documentation, or git workflow.
 - `DESIGN.md`: UI, styling, motion, visual direction, and design constraints.
 - `docs/CHANGELOG.md`: user-visible and important technical history.
 - `package.json`: available scripts. Do not invent scripts.
 - `messages/` and `project.inlang/`: localization configuration.
 
-Conflict priority:
+Follow applicable shared/local instructions, runtime precedence, and explicit user choices. Inspect overrides and ancestor guidance for the target runtime before deciding which instructions apply.
 
-1. Explicit user request.
-2. Current repository behavior and code.
-3. `docs/specs/*` and `PRODUCT.md`.
-4. This `AGENTS.md`.
-5. `DESIGN.md` and detailed docs under `docs/`.
-6. General framework habits.
+Code shows current behavior; specs describe intended behavior. Resolve discrepancies using the task and available evidence. Report material unresolved conflicts; neither existing bugs nor stale documentation automatically determine the desired result.
 
 ## Content Routing
 
@@ -88,25 +88,19 @@ For non-trivial work:
 
 For non-trivial tasks, use:
 
-```text
+~~~text
 docs/tasks/{ascending-number}-{iso-timestamp}-{task-title}/summary.md
 docs/tasks/{ascending-number}-{iso-timestamp}-{task-title}/next-steps.md
-```
+~~~
 
 `summary.md` captures the request, decisions, files changed, verification, and unresolved risks. `next-steps.md` captures follow-ups, deferred work, cleanup opportunities, and prerequisites.
 
 Do not put task progress or handoff detail in `AGENTS.md`.
 
-## Skill Usage
-
-Project-specific skill usage: confirm before use.
-
-Do not add skill names unless repo files or user answers confirm they are available.
-
 ## Implementation Rules
 
 - Use Svelte 5 Runes Mode for Svelte components.
-- Use Tailwind utilities and the project theme. Do not create custom CSS classes or global styles unless explicitly approved.
+- Use Tailwind utilities and the project theme. Custom CSS classes or global styles require project approval; reuse authorization already given for the change.
 - Keep reusable components in `src/lib/components`.
 - Keep reusable data, labels, metadata, route labels, event schedules, form options, and localized content in `src/lib/data`.
 - Keep reusable logic in `src/lib/utils`.
@@ -134,26 +128,19 @@ Before meaningful UI, styling, motion, layout, or copy changes, read `DESIGN.md`
 - Validate registration input server-side.
 - Enforce authorization and data access rules server-side.
 - Treat client-side checks as UX only, not security.
-- Ask before schema changes, production data changes, deploy topology changes, or paid-service changes.
+- This project requires authorization for schema, production-data, deploy-topology, or paid-service changes; ask only when that concrete action is not already authorized.
 
 ## Git And Guardrails
 
 - Work from a dedicated git worktree under `.worktrees/` for implementation tasks, including docs, UI, code, tests, data structures, and architecture changes.
 - Do not change unrelated files.
 - Do not revert user changes unless explicitly asked.
-- Do not delete, overwrite, push, deploy, force-push, or run destructive git commands without explicit approval.
+- Routine scoped edits and removals need no repeated approval. Preserve user work and obtain missing authorization before destructive actions or external mutations. Permission to edit does not itself authorize pushes, deployments, or force-pushes.
 - Do not weaken tests, checks, auth, authorization, validation, accessibility, privacy, or CI to make work pass.
 
 ## Verification
 
-Use scripts confirmed in this example repo's `package.json`, such as:
-
-- `npm run check`
-- `npm run lint`
-- `npm run test`
-- `npm run build`
-
-In a real repo, use only scripts found in repo files or user answers. Choose checks based on the change. If a check cannot run or fails because of pre-existing unrelated work or environment setup, report that clearly with the relevant output.
+Use the relevant scripts actually defined in `package.json`, with their documented prerequisites and working directory. Inspect their effects before running them. Report checks that cannot run or fail because of unrelated work or environment setup, with relevant output; do not describe a failing required check as passed.
 
 ## Review Rules
 
@@ -163,7 +150,7 @@ During review, check PRD/spec alignment, implementation simplicity, tests, secur
 
 ## Acceptance Rules
 
-A task can be accepted only when acceptance criteria are met, relevant checks pass or failures are explained, review findings are resolved or explicitly deferred, docs are updated when behavior/setup/commands/architecture/product decisions changed, and no unrelated changes are included.
+A task can be accepted only when acceptance criteria are met, required checks pass or an applicable exception is explicitly accepted, unavailable or failing checks are reported, review findings are resolved or explicitly deferred, docs are updated when behavior/setup/commands/architecture/product decisions changed, and no unrelated changes are included.
 
 ## Merge Rules
 
@@ -179,13 +166,13 @@ Update this file only when a rule should apply to future agent work.
 
 Do not add one-off task details, full specs, implementation plans, chat summaries, temporary task notes, product requirements, large glossaries, or unresolved brainstorms.
 
-When this file grows too long, move detailed content to the correct document and leave a short pointer here. Review changes to this file like code: the new rule must be durable, specific, correctly placed, non-conflicting, and short.
+Remove repetition before splitting. If necessary detail exceeds the selected cap or has a useful separate scope, move it to existing guidance and leave a pointer explaining when to read it. Review changes to this file like code: the new rule must be durable, specific, correctly placed, non-conflicting, and short.
 
 ## Final Response
 
 After coding, respond in this shape:
 
-```txt
+~~~txt
 Done.
 Changed:
 - ...
@@ -195,4 +182,6 @@ Docs:
 - ...
 Notes:
 - ...
+~~~
+
 ```

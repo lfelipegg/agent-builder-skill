@@ -1,134 +1,52 @@
-# AGENTS.md
+# Basic guide template
 
-Use this file as the quick-start guide for agents working in this repository.
-Keep it short, current, and under 200 lines. This file is for durable future-agent
-rules only; do not use it as a project notebook.
+Adapt the fenced guide to the target repository. Add only confirmed project
+purpose, commands (with working directories), document links, and local policies.
+Omit unavailable sections. The block contains no invented project facts; these
+authoring notes are not part of the generated `AGENTS.md`.
 
-## Project Overview
+```markdown
+# Agent Guide
 
-- Purpose: confirm before use
-- Target user: confirm before use
-- Stack: inspect repository files first; confirm before use if unclear
-- Package manager: inspect lockfiles and manifests first; confirm before use if unclear
+## Before editing
 
-## Required Reading
+Read applicable shared and local instructions for the target runtime, then the
+smallest relevant set of repository docs, manifests, and configuration files.
+Inspect existing behavior and the requested requirements before choosing a fix.
+Follow applicable instruction precedence and explicit user choices. Report
+material conflicts between code and requirements; existing behavior may be a bug.
 
-Before meaningful changes, read the smallest relevant set of files:
+## Scope and authorization
 
-- `README.md` for project setup and human-facing context, if it exists.
-- Package manifests, lockfiles, and config files before choosing commands.
-- Existing docs before changing behavior, architecture, setup, UI, or tests.
-- The nearest `AGENTS.md` if nested instruction files exist.
+Keep changes within the request and preserve unrelated user work. Honor permission
+already given for scoped actions without asking again for routine file edits.
+Use the established dependency and git policies. Confirm missing authorization
+before destructive actions or external mutations outside the authorized scope.
+Do not expose secrets or weaken validation, tests, authorization, accessibility,
+privacy, or data safety to make work pass.
 
-Follow explicit user instructions over this file.
+## Verification and delivery
 
-## Source Of Truth
+Use commands confirmed in repository files or user answers. Inspect scripts
+before running them; choose the smallest relevant checks and report failures
+or checks that could not run. Add focused regression coverage for behavior
+changes when practical. Do not report required failing checks as passed.
 
-Use current repository files and explicit user instructions as source of truth.
-When these documents exist, use them instead of duplicating their content here:
+Summarize changes, verification, and remaining risks. Apply established acceptance
+and release gates; do not infer authorization to merge, push, or deploy from
+permission to edit files.
 
-- `CONTEXT.md` for domain language and glossary
-- `PRODUCT.md` for product intent, audience, and product-wide direction
-- `DESIGN.md` for visual direction and UI constraints
-- `docs/specs/` for product requirements and feature specs
-- `docs/plans/` for implementation plans
-- `docs/decisions/` for architecture decisions and tradeoffs
-- `docs/handoffs/` for continuation notes
-- `docs/reviews/` for review records
-- issue tracker or `docs/tasks/` for temporary tasks and backlog
+## Maintaining this guide
 
-## Commands
+Keep only reusable operating rules and pointers to existing source-of-truth docs.
+Put task progress, specs, plans, and decision records in their established homes.
+Add a rule when it addresses a durable constraint or recurring mistake; remove
+stale rules. Default to at most 200 lines unless the user selects another cap.
+Remove repetition before splitting. Create local instruction files only for
+meaningful differences, and state when linked supporting guidance must be read.
+```
 
-Do not invent commands. Add commands here only after finding them in repo files
-or receiving them from the user.
-
-- Install: confirm before use
-- Dev: confirm before use
-- Build: confirm before use
-- Test: confirm before use
-- Lint: confirm before use
-- Typecheck: confirm before use
-
-## Agent Workflow
-
-- Inspect existing files before editing.
-- Keep changes small and scoped to the request.
-- Match existing naming, style, and structure.
-- Prefer existing project code and platform features before adding new abstractions.
-- Ask before making risky assumptions.
-- Report any command that cannot run and include the reason.
-
-## Guardrails
-
-- Do not install dependencies without permission.
-- Do not delete, overwrite, push, deploy, force-push, or run destructive git
-  commands without explicit approval.
-- Do not print, request, or commit secrets.
-- Do not weaken tests, checks, auth, authorization, accessibility, privacy,
-  data safety, or CI to make work pass.
-- Do not change unrelated files or revert user changes.
-
-## Testing And Verification
-
-- Run the smallest relevant checks that exist in the repository.
-- Add or update tests when behavior changes.
-- For bug fixes, add regression coverage when practical.
-- If no test command is confirmed, explain what was inspected manually.
-- If checks fail for unrelated or environmental reasons, report the failure and
-  relevant output.
-
-## Review, Acceptance, And Merge
-
-Before final response or review, summarize:
-
-- changed files
-- checks run
-- known limitations
-- deferred follow-up work
-
-Treat work as complete only when acceptance criteria are met, relevant checks
-pass or failures are explained, and documentation is updated when behavior,
-setup, commands, architecture, or product decisions changed.
-
-Do not merge, push, deploy, or perform release actions unless explicitly asked.
-
-## Small Repo Policy
-
-- Keep guidance in this single `AGENTS.md` unless it would exceed 200 lines.
-- Add `docs/agents` only when needed to stay under 200 lines or when the user asks.
-- Add nested `AGENTS.md` only when local rules meaningfully differ from the root.
-- Add `/agents` only when explicitly requested or distinct workstreams justify it.
-- If this file grows too long, move detailed guidance to the correct document and
-  leave a short pointer here.
-
-## AGENTS.md Maintenance
-
-Update this file only when a rule should apply to future agent work.
-
-Do not add:
-
-- one-off task details
-- full specs or product requirements
-- implementation plans
-- chat summaries
-- temporary task lists
-- large glossaries
-- design briefs
-
-When a recurring review finding reveals a missing durable rule, add the smallest
-specific rule that would prevent the mistake next time.
-
-## Assumptions To Confirm
-
-- Project purpose and target user.
-- Canonical install, dev, build, test, lint, and typecheck commands.
-- Whether dependency installs are allowed.
-- Whether pushes, deploys, force-pushes, or destructive git commands are ever
-  allowed.
-- Whether source-of-truth docs, task docs, nested `AGENTS.md`, or `/agents`
-  should be used in this repository.
-
-## Final Response
-
-Summarize changed files, verification performed, documentation updates, and any
-remaining risks or assumptions.
+For an explicitly requested draft with unresolved decisions, append one
+`Assumptions to confirm` section describing those decisions. Do not fill command
+slots with guesses. Remove the section when finalizing; resolve necessary facts
+or omit unsupported optional details.
