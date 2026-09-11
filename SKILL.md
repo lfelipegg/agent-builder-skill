@@ -50,6 +50,13 @@ This skill handles agent guidance and subagent planning, not product implementat
   portable prompt plans from installed agents. A planning request alone does
   not authorize runtime installation or live delegation.
 
+### Planning responses
+
+Keep plans concise and readable: actions, verification, and unresolved questions
+at the end when present. Resolve blocking questions before finalizing an executable
+plan. Include planning policies in generated guides only when requested or already
+established; planning does not imply mandatory commits or a new approval gate.
+
 ## Authorization and conflicts
 
 Honor explicit user choices over skill defaults, within applicable higher-level
@@ -78,6 +85,9 @@ An existing bug does not become a requirement because the code implements it.
 - Source commands from repository files or user answers, including working
   directory and prerequisites when relevant. Do not infer scripts from a stack
   name. Distinguish a documented command from one actually executed successfully.
+- Prefer stable capabilities and architecture boundaries over detailed file
+  inventories. Retain verified paths needed for commands, reading triggers, or
+  critical constraints; remove stale navigation without losing durable rules.
 - Preserve safeguards against exposing secrets, weakening validation or checks,
   and reverting unrelated user work. Do not convert project-specific preferences
   in examples into universal requirements.
@@ -101,7 +111,7 @@ budget, not a runtime loading limit. Shorter guides are welcome; do not pad them
 First delete repetition and unnecessary prose. Keep a useful single file when
 it fits the selected cap; there is no earlier automatic split threshold. Move
 necessary specialized detail to existing guidance locations when its scope or
-remaining size warrants it. Use `docs/agents/` only if a new destination is needed.
+remaining size warrants it. Choose destinations using content routing below.
 Every pointer must explain when to read the linked guidance.
 
 Root instructions cover shared behavior. Nested instructions cover meaningful
@@ -119,6 +129,7 @@ Do not move unrelated documents or create a documentation system without scope.
 | --- | --- |
 | Durable shared agent rules | Root `AGENTS.md` |
 | Local agent differences | Nested `AGENTS.md` |
+| Language, testing, or build guidance | Existing topic docs; otherwise `docs/TYPESCRIPT.md`, `docs/TESTING.md`, or `docs/BUILD.md` as relevant |
 | Detailed agent guidance | `docs/agents/` |
 | Product requirements and feature specs | `docs/specs/` |
 | Implementation plans | `docs/plans/` |
@@ -133,6 +144,32 @@ Do not move unrelated documents or create a documentation system without scope.
 Keep pointers in `AGENTS.md`, not full specs, plans, glossaries, design briefs,
 chat summaries, temporary TODOs, or brainstorms. Detailed agent guidance is not
 a substitute destination for product or task records.
+
+### Discover and separate specialized guidance
+
+During creation or refactoring, inspect instructions, relevant documentation links,
+manifests, and language, testing, and build configuration. Recognize topic guidance
+by content, not filenames: search existing docs and follow relevant links before
+choosing a destination. Configuration establishes available tools and commands,
+not evidence for invented coding conventions.
+
+When separation improves relevance, move specialized rules into existing topic
+documents first, preserving their meaning and unique constraints. Create a named
+topic document only when needed content has no suitable home; do not scaffold
+empty documents or split a useful small guide mechanically. Topic documents hold
+specialized guidance; nested `AGENTS.md` files hold directory-specific differences.
+
+Leave conditional reading pointers in the root guide. Link related topic documents
+where useful, using paths relative to each containing document. When language
+changes require tests, link language guidance to the testing guidance instead of
+duplicating its procedures. For example,
+`docs/TYPESCRIPT.md` can link to `TESTING.md` for test changes; that document can
+reference the verified runner configuration, and `docs/BUILD.md` can reference
+`../esbuild.config.mjs` if it exists. These are examples, not required tools or paths.
+Avoid duplicated rules and unnecessary circular reading chains.
+
+Audit requests only propose moves; narrow edits do not authorize unrelated
+extraction. Verify moved rules and their reading paths before removing originals.
 
 ### Maintenance
 
